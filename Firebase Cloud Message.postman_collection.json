@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "01242f6f-8167-4ece-8b1c-ea10613cd0ae",
+		"name": "Firebase Cloud Message",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34005341",
+		"_collection_link": "https://warped-comet-915880.postman.co/workspace/Team-Workspace~021e59ad-6229-436e-8a1a-b8db03fab185/collection/34005341-01242f6f-8167-4ece-8b1c-ea10613cd0ae?action=share&source=collection_link&creator=34005341"
+	},
+	"item": [
+		{
+			"name": "Send Notification",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessToken",
+							"value": "ya29.a0AXooCgs0-1yTb7L3Tq1zKhPkEmzFqaXpiviJrm2y-P4x1CDi470dG4y8-Eu4ipOQqhNVKja8rz-eXe6lGju5a1BLD0rTOSjPOXxWa_RVoFwOjoSfefcae3x8dXSznNwHBuTO4DSFIRMkpNnfXREy6qmQTjXOUPnewQzjaCgYKAYQSARESFQHGX2MiNP2cA6X0kZQZPtHy3E3G4Q0171",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Firebase Cloud Messaging API",
+							"type": "string"
+						},
+						{
+							"key": "tokenType",
+							"value": "Bearer",
+							"type": "string"
+						},
+						{
+							"key": "refresh_token",
+							"value": "1//05A1_7PyeJJrnCgYIARAAGAUSNwF-L9IrL88Ma-F8d4QV9L_0SDLjaR4W-zT8oVGikUk0grP6VSt0evANVlpFjy3lQh_Y602jXnc",
+							"type": "string"
+						},
+						{
+							"key": "expires_in",
+							"value": 3599,
+							"type": "number"
+						},
+						{
+							"key": "token_id",
+							"type": "any"
+						},
+						{
+							"key": "timestamp",
+							"type": "any"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://accounts.google.com/o/oauth2/v2/auth",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "291491829148-jpj521h8p3gnrv0lf4882kullsjgf3jg.apps.googleusercontent.com",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "https://www.googleapis.com/auth/firebase.messaging",
+							"type": "string"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://oauth2.googleapis.com/token",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer AIzaSyDEffV60DqptX5isXVzlhYp1JMKf7t2wlA",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"message\":{\n      \"token\":\"dF8A2vqxUKQPjV27rLXtiO:APA91bGla1qCeVjVXTVqqnsHsPLk5N8icT1n9XzDDxlBnOWaYZmRiHtS_yPU8QzsTHVLIWT_Adu3eI3kGR4I6YWNk9DNx8NsLVy_XjhNCVltg9KQWX74Om5nPBX7Km9JSSEDDNX3IC_l\",\n      \"notification\":{\n        \"body\":\"My name is Vicky\",\n        \"title\":\"Hello there\"\n      }\n   }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://fcm.googleapis.com/v1/projects/fir-push-notification-85613/messages:send",
+					"protocol": "https",
+					"host": [
+						"fcm",
+						"googleapis",
+						"com"
+					],
+					"path": [
+						"v1",
+						"projects",
+						"fir-push-notification-85613",
+						"messages:send"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
