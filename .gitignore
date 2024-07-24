@@ -1,5 +1,4 @@
 
 *.pyc
 *serviceAccountKey.json
-extras/Firebase Cloud Message.postman_collection.json
-extras/deployed.mp4
+Firebase Cloud Message.postman_collection.json
