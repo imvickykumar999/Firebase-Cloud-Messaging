@@ -1,3 +1,10 @@
+># `Scheduled Push Notification`
+>
+>![image](https://github.com/user-attachments/assets/ada6a1a1-2887-420d-9519-9cfa6329695e)
+>![image](https://github.com/user-attachments/assets/0c28b524-ebd3-4c4d-bca9-9e10dca6d518)
+
+# `Postman Push Notification`
+
 ```url
 https://fcm.googleapis.com/v1/projects/fir-push-notification-85613/messages:send
 ```
