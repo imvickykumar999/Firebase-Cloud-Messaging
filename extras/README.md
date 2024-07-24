@@ -1,5 +1,9 @@
+># `News Push Notification`
+>![image](https://github.com/user-attachments/assets/d7e5e1fd-15a7-4713-9db1-2372e2c152f4)
+>![image](https://github.com/user-attachments/assets/df4a7dcd-db3b-4595-904f-47de1de8c8b5)
+>![image](https://github.com/user-attachments/assets/7c0b1c6c-7c94-42a9-b83f-08edeb179bc7)
+
 ># `Scheduled Push Notification`
->
 >![image](https://github.com/user-attachments/assets/ada6a1a1-2887-420d-9519-9cfa6329695e)
 >![image](https://github.com/user-attachments/assets/0c28b524-ebd3-4c4d-bca9-9e10dca6d518)
 
