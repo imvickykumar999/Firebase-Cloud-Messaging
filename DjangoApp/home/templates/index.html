@@ -1,134 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Send Notification</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: #fff;
-            padding: 20px 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        label {
-            font-size: 16px;
-            margin-top: 10px;
-            display: block;
-            color: #555;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-messaging.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var firebaseConfig = {
-                apiKey: "{{ firebase_config.api_key }}",
-                authDomain: "{{ firebase_config.auth_domain }}",
-                projectId: "{{ firebase_config.project_id }}",
-                storageBucket: "{{ firebase_config.storage_bucket }}",
-                messagingSenderId: "{{ firebase_config.messaging_sender_id }}",
-                appId: "{{ firebase_config.app_id }}",
-                measurementId: "{{ firebase_config.measurement_id }}"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            firebase.analytics();
-          
-            const messaging = firebase.messaging();
+{% extends 'base.html' %}
 
-            function getRegistrationToken() {
-                return messaging.getToken({ vapidKey: '{{ firebase_config.vapid_key }}' })
-                    .then((currentToken) => {
-                        if (currentToken) {
-                            return currentToken;
-                        } else {
-                            console.log('No registration token available. Request permission to generate one.');
-                            return null;
-                        }
-                    })
-                    .catch((err) => {
-                        console.log('An error occurred while retrieving token. ', err);
-                        return null;
-                    });
-            }
+{% block title %}Send Notification{% endblock %}
 
-            document.getElementById("notificationForm").addEventListener("submit", function(event) {
-                event.preventDefault();
-                getRegistrationToken().then((token) => {
-                    if (token) {
-                        document.getElementById('registration_id').value = token;
-                        this.submit();
+{% block content %}
+<div class="container">
+    <h1 align="center">Generate FCM Token</h1>
+    <form id="notificationForm" method="post" action="{% url 'send' %}">
+        {% csrf_token %}
+        <input type="hidden" id="registration_id" name="registration_id">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" required></textarea>
+        <button type="submit">Send Notification</button>
+    </form>
+</div>
+<script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-messaging.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var firebaseConfig = {
+            apiKey: "{{ firebase_config.api_key }}",
+            authDomain: "{{ firebase_config.auth_domain }}",
+            projectId: "{{ firebase_config.project_id }}",
+            storageBucket: "{{ firebase_config.storage_bucket }}",
+            messagingSenderId: "{{ firebase_config.messaging_sender_id }}",
+            appId: "{{ firebase_config.app_id }}",
+            measurementId: "{{ firebase_config.measurement_id }}"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+      
+        const messaging = firebase.messaging();
+
+        function getRegistrationToken() {
+            return messaging.getToken({ vapidKey: '{{ firebase_config.vapid_key }}' })
+                .then((currentToken) => {
+                    if (currentToken) {
+                        return currentToken;
                     } else {
-                        alert('Unable to retrieve registration token.');
+                        console.log('No registration token available. Request permission to generate one.');
+                        return null;
                     }
+                })
+                .catch((err) => {
+                    console.log('An error occurred while retrieving token. ', err);
+                    return null;
                 });
-            });
+        }
 
-            messaging.requestPermission().then(function () {
-                console.log("Notification permission granted.");
-            }).catch(function (err) {
-                console.log("Unable to get permission to notify.", err);
-            });
-
-            messaging.onMessage((payload) => {
-                console.log('Message received. ', payload);
+        document.getElementById("notificationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            getRegistrationToken().then((token) => {
+                if (token) {
+                    document.getElementById('registration_id').value = token;
+                    this.submit();
+                } else {
+                    alert('Please Turn ON Notification.');
+                }
             });
         });
-    </script>
-</head>
-<body>
-    <div class="container">
-        <h1>Send Firebase Push Notification</h1>
-        <form id="notificationForm" method="post" action="{% url 'send' %}">
-            {% csrf_token %}
-            <input type="hidden" id="registration_id" name="registration_id">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-            <label for="body">Body:</label>
-            <textarea id="body" name="body" required></textarea>
-            <button type="submit">Send Notification</button>
-        </form>
-    </div>
-</body>
-</html>
+
+        messaging.requestPermission().then(function () {
+            console.log("Notification permission granted.");
+        }).catch(function (err) {
+            console.log("Unable to get permission to notify.", err);
+        });
+
+        messaging.onMessage((payload) => {
+            console.log('Message received. ', payload);
+        });
+    });
+</script>
+{% endblock %}
