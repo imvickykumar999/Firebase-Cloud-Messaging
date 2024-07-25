@@ -1,5 +1,6 @@
 ># `News Push Notification`
 >![image](https://github.com/user-attachments/assets/d7e5e1fd-15a7-4713-9db1-2372e2c152f4)
+>![image](https://github.com/user-attachments/assets/13780c75-9ce3-4904-acba-a1140d6ce9f6)
 >
 >## `Django Push Notification`
 >[![image](https://github.com/user-attachments/assets/8dee1348-3caf-4869-b8a2-24d27c9dbddf)](https://firebasepushnotification.pythonanywhere.com/)
